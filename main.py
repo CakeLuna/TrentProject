@@ -1,8 +1,6 @@
-import numpy as np
 import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
 import re
-from nltk.stem.porter import PorterStemmer
 from sklearn.metrics.pairwise import cosine_similarity
 from flask import Flask, request, jsonify
 
@@ -40,9 +38,6 @@ X = count_vectorizer.fit_transform(df2["Tags"])
 cosine_sim = cosine_similarity(X,X)
 
 
-
-# prompt: I want to apply cosine similarity on tags and df2["tags"]
-
 def recommend_products(sku):
   """
   Recommends products based on cosine similarity of tags.
@@ -67,11 +62,6 @@ def recommend_products(sku):
 
   # Return the recommended products
   return df2[["Variant SKU", "Title"]].iloc[product_indices]
-
-# Example usage:
-# sku = df2["Variant SKU"][900] 
-# recommendations = recommend_products(sku)
-# print(f"Recommendations for SKU {sku}:\n{recommendations}")
 
 @app.route('/rec/<int:sku>',methods=['GET'])
 def get_rec(sku):
