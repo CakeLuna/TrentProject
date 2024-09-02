@@ -6,7 +6,7 @@ from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
-df = pd.read_csv("Products_Report (5).csv")
+df = pd.read_csv("final.csv")
 df2 = df[["ID","Title", "Tags","Variant SKU"]]
 df2 = df2.drop_duplicates(subset='Title')
 df2.dropna(inplace=True)
